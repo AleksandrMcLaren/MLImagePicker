@@ -1,8 +1,0 @@
-#####
-# OS X temporary files that should never be committed
-.DS_Store
-
-# Xcode build files
-DerivedData/
-build/
-Builds/
