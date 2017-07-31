@@ -23,7 +23,7 @@ open class MLImagePicker {
     fileprivate var imagePickerDelegate = MLImagePickerDelegate()
     
     public init() {
-    
+        
         picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
         picker.mediaTypes = ["public.image", "public.movie"]
@@ -35,12 +35,12 @@ open class MLImagePicker {
         self.completion = completion
         
         imagePickerDelegate.completion = { [weak self] (fileUrl) in
-            self?.fileUrl = fileUrl
+            self?.fileUrl = self?.copyToCacheFileURL(fileUrl)
             self?.dismiss()
         }
-
+        
         picker.delegate = imagePickerDelegate
-
+        
         parentController?.present(picker, animated: true) {
             self.strongSelf = self;
         }
@@ -48,7 +48,7 @@ open class MLImagePicker {
     
     func dismiss () {
         
-        //print("MLImagePicker file path: \(self.fileUrl?.absoluteString ?? "")")
+      //  print("MLImagePicker file path: \(self.fileUrl?.absoluteString ?? "")")
         
         DispatchQueue.main.async {
             
@@ -56,6 +56,38 @@ open class MLImagePicker {
                 self.completion?(self.fileUrl)
                 self.strongSelf = nil
             })
+        }
+    }
+    
+    func copyToCacheFileURL (_ fileUrl: URL?) -> (URL?) {
+        
+        do {
+            
+            guard let fileName = fileUrl?.lastPathComponent
+                else { return nil }
+            
+            var cacheUrl = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            cacheUrl.appendPathComponent(String(describing: self))
+            
+            if FileManager.default.fileExists(atPath: cacheUrl.path) == false {
+                // create directory
+                try FileManager.default.createDirectory(at: cacheUrl, withIntermediateDirectories: true, attributes: nil)
+            }
+            
+            cacheUrl.appendPathComponent(fileName)
+            
+            if FileManager.default.fileExists(atPath: cacheUrl.path) == true {
+                // remove file
+                try FileManager.default.removeItem(at: cacheUrl)
+            }
+            
+            try FileManager.default.copyItem(at: fileUrl!, to: cacheUrl)
+            
+            return cacheUrl
+            
+        } catch let error {
+            print("Error: \(error.localizedDescription)")
+            return nil
         }
     }
 }
