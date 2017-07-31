@@ -14,31 +14,33 @@ import Photos
  */
 open class MLImagePicker {
 
-    open var sourceType: UIImagePickerControllerSourceType = .photoLibrary // default value is UIImagePickerControllerSourceTypePhotoLibrary.
-    
+    open var picker: UIImagePickerController!
+
     fileprivate var parentController: UIViewController?
     fileprivate var completion: ((_ url: URL?) -> Void)?
     fileprivate var fileUrl: URL?
     fileprivate var strongSelf: MLImagePicker?
     fileprivate var imagePickerDelegate = MLImagePickerDelegate()
     
-    public init() {}
+    public init() {
+    
+        picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.mediaTypes = ["public.image", "public.movie"]
+    }
     
     open func presentInController(_ controller: UIViewController, completion: ((_ fileUrl: URL?) -> Void)?) {
         
         parentController = controller
         self.completion = completion
         
-        imagePickerDelegate.completion = { (fileUrl) in
-            self.fileUrl = fileUrl
-            self.dismiss()
+        imagePickerDelegate.completion = { [weak self] (fileUrl) in
+            self?.fileUrl = fileUrl
+            self?.dismiss()
         }
-        
-        let picker = UIImagePickerController()
+
         picker.delegate = imagePickerDelegate
-        picker.sourceType = sourceType
-        picker.mediaTypes = ["public.image", "public.movie"]
-        
+
         parentController?.present(picker, animated: true) {
             self.strongSelf = self;
         }
@@ -46,7 +48,7 @@ open class MLImagePicker {
     
     func dismiss () {
         
-        print("MLImagePicker file path: \(self.fileUrl?.absoluteString ?? "")")
+        //print("MLImagePicker file path: \(self.fileUrl?.absoluteString ?? "")")
         
         DispatchQueue.main.async {
             
