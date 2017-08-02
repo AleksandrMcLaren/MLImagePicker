@@ -6,6 +6,7 @@
 //
 
 import Photos
+import MobileCoreServices
 
 /*!
  @class        MLImagePicker
@@ -26,7 +27,7 @@ open class MLImagePicker {
         
         picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
-        picker.mediaTypes = ["public.image", "public.movie"]
+        picker.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
     }
     
     open func presentInController(_ controller: UIViewController, completion: ((_ fileUrl: URL?) -> Void)?) {
