@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F1A79EB1F31A5D7005A3282 /* MLImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1A79EA1F31A5D7005A3282 /* MLImagePickerDelegate.swift */; };
 		1FD7E3B61F2A232800D4D28A /* MLImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7E3B51F2A232800D4D28A /* MLImagePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FD7E3CC1F2B0D9B00D4D28A /* MLImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7E3CB1F2B0D9B00D4D28A /* MLImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F1A79EA1F31A5D7005A3282 /* MLImagePickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLImagePickerDelegate.swift; sourceTree = "<group>"; };
 		1FD7E3981F2A069200D4D28A /* MLImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MLImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FD7E39C1F2A069200D4D28A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FD7E3B51F2A232800D4D28A /* MLImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLImagePicker.h; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 			children = (
 				1FD7E3B51F2A232800D4D28A /* MLImagePicker.h */,
 				1FD7E3CB1F2B0D9B00D4D28A /* MLImagePicker.swift */,
+				1F1A79EA1F31A5D7005A3282 /* MLImagePickerDelegate.swift */,
 				1FD7E39C1F2A069200D4D28A /* Info.plist */,
 			);
 			path = MLImagePicker;
@@ -153,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FD7E3CC1F2B0D9B00D4D28A /* MLImagePicker.swift in Sources */,
+				1F1A79EB1F31A5D7005A3282 /* MLImagePickerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +328,7 @@
 				1FD7E3A21F2A069200D4D28A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

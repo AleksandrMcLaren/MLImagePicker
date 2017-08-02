@@ -1,8 +1,8 @@
 #####
 # OS X temporary files that should never be committed
 .DS_Store
-*.xcuserstate
 *.xcbkptlist
+*.xcuserstate
 
 # Xcode build files
 DerivedData/
