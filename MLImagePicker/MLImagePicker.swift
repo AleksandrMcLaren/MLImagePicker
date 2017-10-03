@@ -1,11 +1,12 @@
 //
-//  ImagePicker.swift
+//  MLImagePicker.swift
 //
 //  Created by Aleksandr on 27/07/2017.
 //  Copyright © 2017 Aleksandr Makarov. All rights reserved.
 //
 
 import MobileCoreServices
+import Photos
 
 /*!
  @class        MLImagePicker
@@ -27,6 +28,8 @@ open class MLImagePicker {
         picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
         picker.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        
+        photoLibraryAccess();
     }
     
     open func presentInController(_ controller: UIViewController, completion: ((_ fileUrl: URL?) -> Void)?) {
@@ -57,6 +60,13 @@ open class MLImagePicker {
                 self.strongSelf = nil
             })
         }
+    }
+    
+    func photoLibraryAccess () {
+        
+        PHPhotoLibrary.requestAuthorization({(status:PHAuthorizationStatus)in
+
+        })
     }
     
     func copyToCacheFileURL (_ fileUrl: URL?) -> (URL?) {
