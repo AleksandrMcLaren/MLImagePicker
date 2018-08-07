@@ -24,7 +24,6 @@ open class MLImagePicker {
     fileprivate var imagePickerDelegate = MLImagePickerDelegate()
     
     public init() {
-        
         picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
         picker.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
@@ -33,7 +32,6 @@ open class MLImagePicker {
     }
     
     open func presentInController(_ controller: UIViewController, completion: ((_ fileUrl: URL?) -> Void)?) {
-        
         parentController = controller
         self.completion = completion
         
@@ -50,11 +48,7 @@ open class MLImagePicker {
     }
     
     func dismiss () {
-        
-      //  print("MLImagePicker file path: \(self.fileUrl?.absoluteString ?? "")")
-        
         DispatchQueue.main.async {
-            
             self.parentController?.dismiss(animated: true, completion: {
                 self.completion?(self.fileUrl)
                 self.strongSelf = nil
@@ -63,16 +57,11 @@ open class MLImagePicker {
     }
     
     func photoLibraryAccess () {
-        
-        PHPhotoLibrary.requestAuthorization({(status:PHAuthorizationStatus)in
-
-        })
+        PHPhotoLibrary.requestAuthorization({(status:PHAuthorizationStatus)in })
     }
     
     func copyToCacheFileURL (_ fileUrl: URL?) -> (URL?) {
-        
         do {
-            
             guard let fileName = fileUrl?.lastPathComponent
                 else { return nil }
             
@@ -94,7 +83,7 @@ open class MLImagePicker {
             try FileManager.default.copyItem(at: fileUrl!, to: cacheUrl)
             
             return cacheUrl
-            
+
         } catch let error {
             print("Error: \(error.localizedDescription)")
             return nil
